@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Parked Vehicles</title>
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="../script/v2parking.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar">
+    <h1>Reindeer Screen!</h1>
+    <button id="undoButton" onclick="undoRemove()" >Undo Remove</button>
+    <button id="back" onclick="goBack()">Back</button>
+  </div>
+<h3>All parked Vehicles:</h3>
+  <div id="parkingMap"></div>
+</body>
+</html>
