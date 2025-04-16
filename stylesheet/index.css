@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #DED6D1;
+  color: #333;
+  text-align: center;
+}
+
+.nav-bar {
+  margin-bottom: 20px;
+  background-color: #2F2F2F;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: #2F2F2F;
+  border:12px;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.changebutton {
+  padding: 3px;
+  margin-top: 10px;
+  background-color: #5ab65dd8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: hide;
+
+}
+
+#adminchangebutt{
+  font-size: 30px;
+}
+
+#refresh {
+  padding: 10px;
+  margin-top: 10px;
+  /* font-size: 1em; */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: hide;
+}
+
+#back {
+  padding: 10px;
+  margin-top: 10px;
+  /* font-size: 1em; */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: hide;
+}
+#back:hover{
+  background-color: #45a049; /* Darker blue on hover */
+  transform: scale(1.05); /* Subtle hover effect */
+}
+
+#undoButton{
+  padding: 10px;
+  margin-top: 10px;
+  /* font-size: em; */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.changebutton:hover {
+  background-color: #45a049;
+}
+
+
+
+button {
+  /* margin-top: 5px; */
+  /* display: flex;
+  align-items: center;
+  justify-content: ;
+  flex-direction: row; */
+  margin: 8px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 7px;
+  border: none;
+  background-color: #E1E5EE;
+}
+
+.selectScreen select {
+  width: 100%; 
+  padding: 12px; 
+  margin: 10px 0; 
+  font-size: 16px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  transition: border-color 0.3s ease;
+  background-color: #f9f9f9; 
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  margin: 10px;
+}
+
+p{
+  text-align: left;
+}
+#phoneNum{
+  text-align: center;
+}

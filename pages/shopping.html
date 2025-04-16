@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Status</title>
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="../script/script.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar" id="reindeer-nav">
+    <h1>Status Screen</h1>
+    <h5>Please update the statuses as you go!</h5>
+  </div>
+
+  <div id="parkingMap"></div>
+  <div class="fab-container">
+    <!-- Sub-buttons -->
+    <button class="fab-sub" id="btn-undo" onclick="goBack()">↩</button>
+
+    <!-- Main FAB -->
+    <button class="fab-main" onclick="toggleFab()">+</button>
+  </div>
+</body>
+</html>

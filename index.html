@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Screen</title>
+  <link rel="stylesheet" href="../stylesheet/index.css">
+  <script src="../../script/jobselect.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar">
+    <h1 class="title">Welcome to the <u>Christmas store</u> app!</h1>
+  </div>
+
+  <div class="glass-card">
+  <h2>Select Your Job!</h2>
+  <div class="selectScreen">
+    <select id="selectScreen">
+      <option value="" disabled selected>Select your job!</option>
+      <option value="ParkingManagement">Parking</option>
+      <option value="Shopper">Shopper</option>
+      <option value="Wrapper">Wrapper</option>
+      <option value="Administrator">Administrator</option>
+    </select>
+    <button class="changebutton" onclick="handleJobSelection()">Select Job</button>
+  </div>
+  </div>
+
+  <div>
+    <a href="pages/help.html">
+      <button class="changebutton">Click here for <b><u>help!</u></b></button>
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Parked Vehicles</title>
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="../script/script.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar" id="reindeer-nav">
+    <h1>Reindeer Screen!</h1>
+    <small>Remove cars when presents are delivered!</small>
+  </div>
+  <div class="fab-container">
+    <!-- Sub-buttons -->
+    <button class="fab-sub" id="btn-undo" onclick="goBack()">↩</button>
+    <button class="fab-sub" id="btn-create" onclick="undoRemove()">Undo</button>
+
+    <!-- Main FAB -->
+    <button class="fab-main" onclick="toggleFab()">+</button>
+  </div>
+<h3>All parked Vehicles:</h3>
+  <div id="parkingMap"></div>
+</body>
+</html>
