@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,3 +43,49 @@
   </div>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Screen</title>
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script src="../script/parkingMap.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar">
+    <h1 class="title" id="adminTitle">Admin Page</h1>
+    <button id="back" onclick="goBack()">Back</button>
+  </div>
+ 
+  <button class="changebutton" id="adminchangebutt"  onclick="openModal('slotCount')">Change Parking Slots</button>
+<a href="parkingmap.html"><button class="changebutton" id="adminchangebutt">Preview All Parked Cars</button></a>
+<a href="removedCar.html"><button class="changebutton" id="adminchangebutt">All Removed Vehicles</button></a>
+
+  <div id="carModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle">Enter Car Number</h3>
+        
+        <!-- Language dropdown, initially hidden -->
+        <select id="languageSelect" style="display: none;">
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+        </select>
+        
+        <input type="text" id="carInput" placeholder="Enter here..." maxlength="8">
+        <p id="warningMessage" class="warning-message" style="display: none;">
+            <strong>Warning:</strong> Reducing the number of parking slots will erase any car number data from removed slots.
+        </p>
+        <button id="modalConfirmButton" onclick="confirmAction()">Confirm</button>
+    </div>
+</div>
+
+  </div>
+</body>
+</html>
+>>>>>>> 9b29609b2d4bcc7e47462940e1311a6a7cce2607

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,3 +49,55 @@
   </div>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Map</title>
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <!-- Firebase App (non-modular) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Load your custom JavaScript file after Firebase -->
+  <script src="../script/parkingMap.js" defer></script>
+</head>
+<body>
+  <div class="nav-bar">
+    <h1 class="title">Renewal Parking Map</h1>
+    <div class="buttons">
+      <button id="undoButton" onclick="undoRemove()" disabled>Undo Remove</button>
+      <button id="refresh" onclick="refresh()">Refresh</button>
+      <button id="back" onclick="goBack()">Back</button>
+      <!-- <a href='display-only.html'><button>Stats</button></a> -->
+      </div>
+  </div>
+  <input type="text" id="searchInput" placeholder="Search Car #..." oninput="searchCar()" pattern="[\d-]*" title="Only numbers and dashes are allowed">
+
+  <div id="parkingMap"></div>
+
+  <div id="carModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle">Enter Car Number</h3>
+        
+        <!-- Language dropdown, initially hidden -->
+        <select id="languageSelect" style="display: none;">
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+        </select>
+        
+        <input type="text" id="carInput" placeholder="Enter here..." maxlength="8">
+        <p id="warningMessage" class="warning-message" style="display: none;">
+            <strong>Warning:</strong> Reducing the number of parking slots will erase any car number data from removed slots.
+        </p>
+        <button id="modalConfirmButton" onclick="confirmAction()">Confirm</button>
+    </div>
+</div>
+
+  </div>
+</body>
+</html>
+>>>>>>> 9b29609b2d4bcc7e47462940e1311a6a7cce2607
