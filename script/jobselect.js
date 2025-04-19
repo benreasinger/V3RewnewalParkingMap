@@ -6,19 +6,18 @@ function handleJobSelection() {
       alert("Please select a job before proceeding.");
       return;
     }
-    // Redirect based on the selected job
     switch (selectedJob) {
       case "Shopper":
-        window.location.href = "../pages/shopping.html";
+        window.location.href = "pages/shopping.html";
         break;
       case "ParkingManagement":
-        window.location.href = "../pages/createVehicle.html";
+        window.location.href = "pages/createVehicle.html";
         break;
       case "Wrapper":
-        window.location.href = "../pages/reindeer.html";
+        window.location.href = "pages/reindeer.html";
         break;
       case "Administrator":
-        window.location.href = "../pages/login-page/login-page.html";
+        window.location.href = "pages/login-page/login-page.html";
         break;
       default:
         alert("Invalid job selection.");

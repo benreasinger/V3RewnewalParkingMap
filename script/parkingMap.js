@@ -174,12 +174,12 @@
       }
     }
     
-    function addCount(){
-      if(removalCount > 1){
+    // function addCount(){
+    //   if(removalCount > 1){
         
-      }
+    //   }
     
-    }
+    // }
     
     // Function to undo the last car removal
     function undoRemove() {
@@ -284,7 +284,7 @@
           <span style="font-size: smaller";>Language:</span> <span style="font-size: smaller;">${slot["language"] || "N/A"}</span>
         `;
     
-        // Only add action buttons if NOT on the display-only page
+        // Only add action buttons if NOT on the display-only page OUTDATED only works if not removed...
         if (!isDisplayOnly) {
           const addButton = document.createElement("button");
           addButton.textContent = "Add Car";
@@ -344,6 +344,5 @@
     }
     
     
-    // Call init function to start
     init();
     
