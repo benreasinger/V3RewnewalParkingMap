@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../stylesheet/styles.css">
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script src="../script/parkingMap.js" defer></script>
+  <script src="../script/main.js" defer></script>
 </head>
 <body>
   <div class="nav-bar">
@@ -23,24 +23,19 @@
 
   <div id="parkingMap"></div>
 
-  <div id="carModal" class="modal">
+  <div id="vehicleModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3 id="modalTitle">Enter Car Number</h3>
-        
-        <!-- Language dropdown, initially hidden -->
-        <select id="languageSelect" style="display: none;">
-            <option value="english">English</option>
-            <option value="spanish">Spanish</option>
-        </select>
-        
-        <input type="text" id="carInput" placeholder="Enter here..." maxlength="8">
-        <p id="warningMessage" class="warning-message" style="display: none;">
-            <strong>Warning:</strong> Reducing the number of parking slots will erase any car number data from removed slots.
-        </p>
-        <button id="modalConfirmButton" onclick="confirmAction()">Confirm</button>
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Add New Vehicle</h3>
+      <input type="text" id="newCarNumber" placeholder="Enter Car Number" oninput="this.value = this.value.replace(/[^0-9-]/g, '').slice(0, 11)">
+      <select id="newCarLanguage">
+        <option value="english">English</option>
+        <option value="spanish">Spanish</option>
+      </select>
+      <input type="number" id="parkingNumberInput" placeholder="Parking Spot Number" min="1">
+      <button onclick="createVehicle()">Add Vehicle</button>
     </div>
-</div>
+  </div>
 
   </div>
 </body>
