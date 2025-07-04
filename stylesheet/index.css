@@ -29,6 +29,52 @@ body {
   
   font-family: 'Courier New', Courier, monospace;
 }
+ 
+/* Compact dropdown in nav */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.dropbtn {
+  background-color: #3a3a3a;
+  color: white;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show dropdown when active */
+.dropdown.show .dropdown-content {
+  display: block;
+}
 
 .changebutton {
   padding: 3px;
@@ -70,8 +116,8 @@ body {
   display: hide;
 }
 #back:hover{
-  background-color: #45a049; /* Darker blue on hover */
-  transform: scale(1.05); /* Subtle hover effect */
+  background-color: #45a049; 
+  transform: scale(1.05); 
 }
 
 #undoButton{
@@ -104,7 +150,7 @@ button {
   background-color: #E1E5EE;
 }
 
-.selectScreen select {
+ /* .selectScreen select {
   width: 100%; 
   padding: 12px; 
   margin: 10px 0; 
@@ -113,7 +159,7 @@ button {
   border-radius: 8px; 
   transition: border-color 0.3s ease;
   background-color: #f9f9f9; 
-}
+} */
 
 .glass-card {
   background: rgba(255, 255, 255, 0.2);
@@ -122,7 +168,7 @@ button {
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   margin: 10px;
-}
+} 
 
 p{
   text-align: left;

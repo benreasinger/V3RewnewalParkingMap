@@ -1,28 +1,61 @@
-// jobselect.js
-function handleJobSelection() {
-    const jobSelect = document.getElementById("selectScreen");
-    const selectedJob = jobSelect.value;
-    if (!selectedJob) {
-        alert("Please select a job before proceeding.");
-        return;
+// // jobselect.js
+// function handleJobSelection() {
+//     const jobSelect = document.getElementById("selectScreen");
+//     const selectedJob = jobSelect.value;
+//     if (!selectedJob) {
+//         alert("Please select a job before proceeding.");
+//         return;
+//     }
+//     switch (selectedJob) {
+//         case "Shopper":
+//             window.location.href = "pages/shopping.html";
+//             break;
+//         case "ParkingManagement":
+//             window.location.href = "pages/createVehicle.html";
+//             break;
+//         case "Wrapper":
+//             window.location.href = "pages/reindeer.html";
+//             break;
+//         case "Administrator":
+//             window.location.href = "pages/login-page/login-page.html";
+//             break;
+//         default:
+//             alert("Invalid job selection.");
+//     }
+// }
+function toggleDropdown() {
+    document.querySelector(".dropdown").classList.toggle("show");
+  }
+  
+  // Optional: close dropdown when clicking outside
+  window.addEventListener("click", function (e) {
+    if (!e.target.matches('.dropbtn')) {
+      const dropdown = document.querySelector(".dropdown");
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+      }
     }
-    switch (selectedJob) {
-        case "Shopper":
-            window.location.href = "pages/shopping.html";
-            break;
-        case "ParkingManagement":
-            window.location.href = "pages/createVehicle.html";
-            break;
-        case "Wrapper":
-            window.location.href = "pages/reindeer.html";
-            break;
-        case "Administrator":
-            window.location.href = "pages/login-page/login-page.html";
-            break;
-        default:
-            alert("Invalid job selection.");
+  });
+  
+  function handleJobRedirect(job) {
+    switch (job) {
+      case "Shopper":
+        window.location.href = "pages/shopping.html";
+        break;
+      case "ParkingManagement":
+        window.location.href = "pages/createVehicle.html";
+        break;
+      case "Wrapper":
+        window.location.href = "pages/reindeer.html";
+        break;
+      case "Administrator":
+        window.location.href = "pages/login-page/login-page.html";
+        break;
+      default:
+        alert("Invalid job.");
     }
-}
+  }
+  
 function goBack() {
     window.history.back();
 }
