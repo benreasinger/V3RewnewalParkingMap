@@ -225,7 +225,6 @@ function renderParkingMap() {
 
     parkingMap.innerHTML = "";
 
-    // Only show buttons on these pages
     const removeButt = window.location.pathname.endsWith("/reindeer.html") || window.location.pathname.endsWith("/reindeer.html");
     const statusButt =  window.location.pathname.endsWith("/shopping.html");
     parkingSlots.filter(slot => slot["car-number"]).forEach(slot => {
@@ -295,8 +294,6 @@ function removeCar(parkingNumber) {
     const slot = parkingSlots.find(slot => slot["parking-number"] === parkingNumber);
     if (slot && slot["car-number"]) {
         lastRemovedSlot = { ...slot }; // Store a copy for undo
-
-        // Save to "removedCars" in Firebase
         const parkedDuration = calculateParkedTime(slot.parkedAt); // use your existing function
 
         const removedCarDetails = {
@@ -311,7 +308,6 @@ function removeCar(parkingNumber) {
 
         firebase.database().ref('removedCars').push(removedCarDetails);
 
-        // Clear the slot in the main map
         slot["car-number"] = "";
         slot.language = "N/A";
         slot.status = "N/A";
@@ -374,18 +370,14 @@ function init() {
             renderParkingMap();
         });
 
-    // Live update
     parkingSlotsRef.on('value', snapshot => {
         parkingSlots = snapshot.val() || [];
         renderParkingMap();
     });
 }
-// HTML elements
 const removedCarsList = document.getElementById("removedCarsList");
 const totalRemovedCars = document.getElementById("totalRemovedCars");
 const resetButton = document.getElementById("resetButton");
-
-// Function to fetch removed cars and update the list dynamically
 function fetchRemovedCars() {
     const removedCarsList = document.getElementById("removedCarsList");
     database.ref("removedCars").on("child_added", (snapshot) => {
@@ -393,8 +385,6 @@ function fetchRemovedCars() {
         console.log("Fetched removed car:", removedCar); // Debugging line
         const listItem = document.createElement("div");
         listItem.classList.add("removed-car-card");
-
-        // Create and append details for the removed car
         listItem.innerHTML = `
             <h3>Removed Car</h3>
             <p><strong>Parking Number:</strong> ${removedCar["parking-number"]}</p>
@@ -404,37 +394,78 @@ function fetchRemovedCars() {
             <p><strong>parkedTime: </strong> ${removedCar["parkedTime"]}</p>
             <p><strong>Removed At:</strong> ${removedCar["removedAt"]}</p>
         `;
-
-        // Append the list item to the UI
         removedCarsList.appendChild(listItem);
-
-        // Update total count of removed cars
         updateRemovedCarCount();
     });
 }
 
+function calculateAnalytics() {
+    database.ref("removedCars").once("value", (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
 
-// Update the removed car count display
+        let totalSeconds = 0;
+        let count = 0;
+        const statusMap = {};
+
+        Object.values(data).forEach(car => {
+            const parkedTimeStr = car.parkedTime; // Format like "1h 30m" or "45m"
+            let seconds = 0;
+
+            const hourMatch = parkedTimeStr.match(/(\d+)h/);
+            const minMatch = parkedTimeStr.match(/(\d+)m/);
+
+            if (hourMatch) seconds += parseInt(hourMatch[1]) * 3600;
+            if (minMatch) seconds += parseInt(minMatch[1]) * 60;
+
+            totalSeconds += seconds;
+            count++;
+
+            if (!statusMap[car.status]) {
+                statusMap[car.status] = { total: 0, seconds: 0 };
+            }
+            statusMap[car.status].total++;
+            statusMap[car.status].seconds += seconds;
+        });
+        const avgSeconds = count ? Math.floor(totalSeconds / count) : 0;
+        const avgTimeFormatted = formatTime(avgSeconds);
+        document.getElementById("analyticsTotal").textContent = count;
+        document.getElementById("analyticsAvgTime").textContent = avgTimeFormatted;
+        const breakdownDiv = document.getElementById("statusBreakdown");
+        breakdownDiv.innerHTML = "<h3>Status Breakdown</h3>";
+        for (let status in statusMap) {
+            const entry = statusMap[status];
+            const avg = entry.total ? Math.floor(entry.seconds / entry.total) : 0;
+            breakdownDiv.innerHTML += `<p><strong>${status}</strong>: ${entry.total} cars | Avg: ${formatTime(avg)}</p>`;
+        }
+    });
+}
+
+function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    return `${h > 0 ? h + "h " : ""}${m}m`;
+}
+
+
+
 function updateRemovedCarCount() {
     const totalCarsElement = document.getElementById("removedCarCount");
-
-    // Fetch the total count from Firebase and update the UI
     database.ref("removedCars").once("value", (snapshot) => {
         const totalCount = snapshot.numChildren();
         totalCarsElement.textContent = totalCount;
     });
 }
 
-// Reset the list of removed cars and count
 function resetRemovedCars() {
-    // Clear the list of removed cars from the UI
     const removedCarsList = document.getElementById("removedCarsList");
     removedCarsList.innerHTML = ""; // Clear the list
 
-    // Reset the removed cars data in Firebase (optional, if you want to reset it in the database)
     database.ref("removedCars").remove();
     updateRemovedCarCount();
+    calculateAnalytics();
 }
 
 fetchRemovedCars();
+calculateAnalytics();
 init();

@@ -430,3 +430,17 @@
   #indexNavBar{
     justify-content: center;
   }
+  .analytics-summary {
+    padding: 1em;
+    background: #f8f8f8;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .analytics-summary h2 {
+    margin-top: 0;
+  }
+  .analytics-summary p {
+    margin: 0.3em 0;
+  }
+  
