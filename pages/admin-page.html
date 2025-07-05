@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../stylesheet/styles.css">
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
   <script src="../script/main.js" defer></script>
 </head>
 <body>
@@ -15,30 +14,25 @@
     <h1 class="title" id="adminTitle">Admin Page</h1>
     <button id="back" onclick="goBack()">Back</button>
   </div>
- 
-  <button class="changebutton" id="adminchangebutt"  onclick="openModal('slotCount')">Change Parking Slots</button>
-<a href="parkingmap.html"><button class="changebutton" id="adminchangebutt">Preview All Parked Cars</button></a>
-<a href="removedCar.html"><button class="changebutton" id="adminchangebutt">All Removed Vehicles</button></a>
 
-  <div id="carModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3 id="modalTitle">Enter Car Number</h3>
-        
-        <!-- Language dropdown, initially hidden -->
-        <select id="languageSelect" style="display: none;">
-            <option value="english">English</option>
-            <option value="spanish">Spanish</option>
-        </select>
-        
-        <input type="text" id="carInput" placeholder="Enter here..." maxlength="8">
-        <p id="warningMessage" class="warning-message" style="display: none;">
-            <strong>Warning:</strong> Reducing the number of parking slots will erase any car number data from removed slots.
-        </p>
-        <button id="modalConfirmButton" onclick="confirmAction()">Confirm</button>
-    </div>
+  <a href="parkingmap.html"><button class="changebutton" id="adminchangebutt">Preview All Parked Cars</button></a>
+  <a href="removedCar.html"><button class="changebutton" id="adminchangebutt">All Removed Vehicles</button></a>
+
+  <div class="admin-stats-container">
+  <section id="adminStats" class="stats-panel">
+    <h2> Live Parking Stats</h2>
+    <p><strong>Total Parked:</strong> <span id="totalParked">0</span></p>
+    <p><strong>Empty Spots:</strong> <span id="emptySpots">0</span></p>
+    <div id="statusCounts"></div>
+  </section>
+
+  <div id="analyticsSummary" class="analytics-summary">
+    <h2> Analytics Summary</h2>
+    <p><strong>Total Removed Cars:</strong> <span id="analyticsTotal">0</span></p>
+    <p><strong>Average Parked Time:</strong> <span id="analyticsAvgTime">-</span></p>
+    <div id="statusBreakdown"></div>
+  </div>
 </div>
 
-  </div>
 </body>
 </html>

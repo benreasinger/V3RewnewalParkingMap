@@ -13,17 +13,21 @@
   <div class="nav-bar">
     <h1>Parking Management</h1>
   </div>
-
-  <div id="parkingMap">
-    
+<div class="dropdown">
+  <button onclick="toggleSortDropdown()" class="dropbtn">Sort By ▼</button>
+  <div id="sortDropdownContent" class="dropdown-content">
+    <a href="#" onclick="setSortMode('default')">Default</a>
+    <a href="#" onclick="setSortMode('waited')">Waited Time</a>
+    <a href="#" onclick="setSortMode('status-time')">Status & Waited</a>
   </div>
+</div>
+
+  <div id="parkingMap"></div>
 
    <div class="fab-container">
-    <!-- Sub-buttons -->
     <button class="fab-sub" id="btn-create" onclick="openModal()"><small>Create Car</small></button>
     <button class="fab-sub" id="btn-undo" onclick="goBack()">↩</button>
 
-    <!-- Main FAB -->
     <button class="fab-main" onclick="toggleFab()">+</button>
   </div>
   <!-- Add Vehicle Modal -->

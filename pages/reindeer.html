@@ -14,6 +14,14 @@
     <h1>Reindeer Screen!</h1>
     <small>Remove cars when presents are delivered!</small>
   </div>
+  <div class="dropdown">
+  <button onclick="toggleSortDropdown()" class="dropbtn">Sort By ▼</button>
+  <div id="sortDropdownContent" class="dropdown-content">
+    <a href="#" onclick="setSortMode('default')">Default</a>
+    <a href="#" onclick="setSortMode('waited')">Waited Time</a>
+    <a href="#" onclick="setSortMode('status-time')">Status & Waited</a>
+  </div>
+</div>
   <div class="fab-container">
     <!-- Sub-buttons -->
     <button class="fab-sub" id="btn-undo" onclick="goBack()">↩</button>

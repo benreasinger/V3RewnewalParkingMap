@@ -14,6 +14,14 @@
     <h1>Status Screen</h1>
     <h5>Please update the statuses as you go!</h5>
   </div>
+  <div class="dropdown">
+  <button onclick="toggleSortDropdown()" class="dropbtn">Sort By ▼</button>
+  <div id="sortDropdownContent" class="dropdown-content">
+    <a href="#" onclick="setSortMode('default')">Default</a>
+    <a href="#" onclick="setSortMode('waited')">Waited Time</a>
+    <a href="#" onclick="setSortMode('status-time')">Status & Waited</a>
+  </div>
+</div>
 
   <div id="parkingMap"></div>
   <div class="fab-container">

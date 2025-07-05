@@ -453,3 +453,68 @@ select:focus {
 #reindeer-nav{
   flex-direction: column;
 }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #3a3a3a;
+  color: white;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.admin-stats-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.stats-panel,
+.analytics-summary {
+  flex: 1 1 45%;
+  background-color: #f7f7f7;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  min-width: 300px;
+}
+
+.stats-panel h2,
+.analytics-summary h2 {
+  margin-top: 0;
+  color: #333;
+}

@@ -204,16 +204,64 @@ if (window.location.pathname.includes("parkingmap.html")) {
       });
     }}
 
+    function updateAdminStats() {
+    const totalParked = parkingSlots.filter(slot => slot["car-number"]).length;
+    const emptySpots = totalSlots - totalParked;
+
+    document.getElementById("totalParked").textContent = totalParked;
+    document.getElementById("emptySpots").textContent = emptySpots;
+
+    const statusCounts = {};
+    parkingSlots.forEach(slot => {
+        if (slot["car-number"]) {
+            statusCounts[slot.status] = (statusCounts[slot.status] || 0) + 1;
+        }
+    });
+
+    const statusCountsDiv = document.getElementById("statusCounts");
+    statusCountsDiv.innerHTML = "<h4>Status Breakdown:</h4>";
+    for (let status in statusCounts) {
+        statusCountsDiv.innerHTML += `<p>${status}: ${statusCounts[status]}</p>`;
+    }
+}
+
+let sortMode = "default";
+
 function renderParkingMap() {
     const parkingMap = document.getElementById("parkingMap");
     if (!parkingMap) return;
 
     parkingMap.innerHTML = "";
-    parkingSlots.filter(slot => slot["car-number"]).forEach(slot => {
+
+    const currentPath = window.location.pathname;
+    const showRemoveButton = currentPath.endsWith("/reindeer.html");
+    const showStatusButton = currentPath.endsWith("/shopping.html");
+
+    let visibleSlots = parkingSlots.filter(slot => slot["car-number"]);
+
+    if (sortMode === "waited") {
+        visibleSlots.sort((a, b) => {
+            const aTime = Date.now() - (a.parkedAt || 0);
+            const bTime = Date.now() - (b.parkedAt || 0);
+            return bTime - aTime;
+        });
+    } else if (sortMode === "status-time") {
+        const statusOrder = ["In-Car", "Fetch-to-shop", "Shopping", "Wrapping", "Waiting for Reindeer"];
+        visibleSlots.sort((a, b) => {
+            const statusCompare = statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
+            if (statusCompare !== 0) return statusCompare;
+            const aTime = Date.now() - (a.parkedAt || 0);
+            const bTime = Date.now() - (b.parkedAt || 0);
+            return bTime - aTime;
+        });
+    }
+
+    visibleSlots.forEach(slot => {
         const slotDiv = document.createElement("div");
         slotDiv.className = `parking-slot ${slot.status ? `status-${slot.status.toLowerCase().replace(/ /g, '-')}` : ''}`;
 
         const parkedTime = slot.parkedAt ? calculateParkedTime(slot.parkedAt) : "Just parked";
+
         slotDiv.innerHTML = `
             <strong>Spot ${slot["parking-number"]}</strong><br>
             Status: ${slot.status}<br>
@@ -222,20 +270,40 @@ function renderParkingMap() {
             Parked: ${parkedTime}
         `;
 
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove Car";
-        removeButton.onclick = () => removeCar(slot["parking-number"]);
+        if (showRemoveButton) {
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove Car";
+            removeButton.onclick = () => removeCar(slot["parking-number"]);
+            slotDiv.appendChild(removeButton);
+        }
 
-        const statusButton = document.createElement("button");
-        statusButton.textContent = "Change Status";
-        statusButton.onclick = () => changeStatus(slot["parking-number"]);
-
-        slotDiv.appendChild(removeButton);
-        slotDiv.appendChild(statusButton);
+        if (showStatusButton) {
+            const statusButton = document.createElement("button");
+            statusButton.textContent = "Change Status";
+            statusButton.onclick = () => changeStatus(slot["parking-number"]);
+            slotDiv.appendChild(statusButton);
+        }
 
         parkingMap.appendChild(slotDiv);
     });
 }
+
+
+function setSortMode(mode) {
+    sortMode = mode;
+    renderParkingMap();
+
+    const dropdownContent = document.getElementById("sortDropdownContent");
+    if (dropdownContent && dropdownContent.classList.contains("show")) {
+        dropdownContent.classList.remove("show");
+    }
+}
+
+function toggleSortDropdown() {
+    document.getElementById("sortDropdownContent").classList.toggle("show");
+}
+
+
 function openModal() {
     document.getElementById("vehicleModal").style.display = "block";
   }
@@ -252,45 +320,7 @@ function calculateParkedTime(parkedAt) {
     return `${hours}h ${minutes}m`;
 }
 
-function renderParkingMap() {
-    const parkingMap = document.getElementById("parkingMap");
-    if (!parkingMap) return;
 
-    parkingMap.innerHTML = "";
-
-    const removeButt = window.location.pathname.endsWith("/reindeer.html") || window.location.pathname.endsWith("/reindeer.html");
-    const statusButt =  window.location.pathname.endsWith("/shopping.html");
-    parkingSlots.filter(slot => slot["car-number"]).forEach(slot => {
-        const slotDiv = document.createElement("div");
-        slotDiv.className = `parking-slot ${slot.status ? `status-${slot.status.toLowerCase().replace(/ /g, '-')}` : ''}`;
-
-        const parkedTime = slot.parkedAt ? calculateParkedTime(slot.parkedAt) : "Just parked";
-
-        slotDiv.innerHTML = `
-            <strong>Spot ${slot["parking-number"]}</strong><br>
-            Status: ${slot.status}<br>
-            Car #: ${slot["car-number"]}<br>
-            Language: ${slot.language}<br>
-            Parked: ${parkedTime}
-        `;
-
-        if (removeButt) {
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remove Car";
-            removeButton.onclick = () => removeCar(slot["parking-number"]);
-
-            slotDiv.appendChild(removeButton);        }
-        if(statusButt){
-            const statusButton = document.createElement("button");
-            statusButton.textContent = "Change Status";
-            statusButton.onclick = () => changeStatus(slot["parking-number"]);
-            slotDiv.appendChild(statusButton);
-
-        }
-
-        parkingMap.appendChild(slotDiv);
-    });
-}
 
 function createVehicle() {
     const carNumber = document.getElementById("newCarNumber")?.value.trim();
@@ -401,6 +431,8 @@ function init() {
                 initializeParkingSlots(); // If nothing in DB, create fresh
             }
             renderParkingMap();
+            updateAdminStats();
+
         });
 
     parkingSlotsRef.on('value', snapshot => {
