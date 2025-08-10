@@ -1,33 +1,7 @@
-// // jobselect.js
-// function handleJobSelection() {
-//     const jobSelect = document.getElementById("selectScreen");
-//     const selectedJob = jobSelect.value;
-//     if (!selectedJob) {
-//         alert("Please select a job before proceeding.");
-//         return;
-//     }
-//     switch (selectedJob) {
-//         case "Shopper":
-//             window.location.href = "pages/shopping.html";
-//             break;
-//         case "ParkingManagement":
-//             window.location.href = "pages/createVehicle.html";
-//             break;
-//         case "Wrapper":
-//             window.location.href = "pages/reindeer.html";
-//             break;
-//         case "Administrator":
-//             window.location.href = "pages/login-page/login-page.html";
-//             break;
-//         default:
-//             alert("Invalid job selection.");
-//     }
-// }
 function toggleDropdown() {
     document.querySelector(".dropdown").classList.toggle("show");
   }
   
-  // Optional: close dropdown when clicking outside
   window.addEventListener("click", function (e) {
     if (!e.target.matches('.dropbtn')) {
       const dropdown = document.querySelector(".dropdown");
@@ -60,7 +34,6 @@ function goBack() {
     window.history.back();
 }
 
-// login-page.js
 const loginForm = document.getElementById("login-form");
 const loginButton = document.getElementById("login-form-submit");
 const loginErrorMsg = document.getElementById("login-error-msg");
@@ -83,7 +56,6 @@ loginButton?.addEventListener("click", (e) => {
     }
 });
 
-// Firebase Configuration (shared)
 const firebaseConfig = {
     apiKey: "AIzaSyDbs6UgbaxuxKZyG3v464lkeEtMJQbZ6-4",
     authDomain: "renewalparking.firebaseapp.com",
@@ -98,7 +70,6 @@ const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 console.log("Firebase initialized successfully!");
 
-// Core Variables
 let totalSlots = 160;
 let parkingSlots = [];
 let lastRemovedSlot = null;
@@ -347,6 +318,9 @@ function createVehicle() {
 
         updateDatabase();
         renderParkingMap();
+        document.getElementById("newCarNumber").value = "";
+        document.getElementById("newCarLanguage").value = language;
+        document.getElementById("parkingNumberInput").value = "";
         closeModal();
     } else {
         alert("Parking spot is already occupied or invalid.");
@@ -387,7 +361,6 @@ function undoRemove() {
     if (lastRemovedSlot) {
         const slot = parkingSlots.find(s => s["parking-number"] === lastRemovedSlot["parking-number"]);
         if (slot) {
-            // Restore data
             slot["car-number"] = lastRemovedSlot["car-number"];
             slot.language = lastRemovedSlot.language;
             slot.status = lastRemovedSlot.status;
@@ -428,7 +401,7 @@ function init() {
                     ...slot
                 }));
             } else {
-                initializeParkingSlots(); // If nothing in DB, create fresh
+                initializeParkingSlots();
             }
             renderParkingMap();
             updateAdminStats();
@@ -524,7 +497,7 @@ function updateRemovedCarCount() {
 
 function resetRemovedCars() {
     const removedCarsList = document.getElementById("removedCarsList");
-    removedCarsList.innerHTML = ""; // Clear the list
+    removedCarsList.innerHTML = "";
 
     database.ref("removedCars").remove();
     updateRemovedCarCount();
