@@ -13,18 +13,20 @@ function toggleDropdown() {
   
   function handleJobRedirect(job) {
     switch (job) {
-      case "Shopper":
+    case "Shopper":
         window.location.href = "pages/shopping.html";
         break;
-      case "ParkingManagement":
+    case "ParkingManagement":
         window.location.href = "pages/createVehicle.html";
         break;
-      case "Wrapper":
-        window.location.href = "pages/reindeer.html";
+    case "Reindeer":
+        window.location.href = "pages/reindeer.html";        
         break;
-      case "Administrator":
+    case "Administrator":
         window.location.href = "pages/login-page/login-page.html";
         break;
+    case "Wrapper":
+        window.location.href = "pages/wrapper.html";
       default:
         alert("Invalid job.");
     }
@@ -206,8 +208,9 @@ function renderParkingMap() {
 
     const currentPath = window.location.pathname;
     const showRemoveButton = currentPath.endsWith("/reindeer.html");
-    const showStatusButton = currentPath.endsWith("/shopping.html");
+    const showStatusButton = currentPath.endsWith("/shopping.html") || currentPath.endsWith("/wrapper.html");
 
+    
     let visibleSlots = parkingSlots.filter(slot => slot["car-number"]);
 
     if (sortMode === "waited") {
