@@ -27,8 +27,6 @@ function toggleDropdown() {
         break;
     case "Wrapper":
         window.location.href = "pages/wrapper.html";
-      default:
-        alert("Invalid job.");
     }
   }
   
@@ -220,7 +218,7 @@ function renderParkingMap() {
             return bTime - aTime;
         });
     } else if (sortMode === "status-time") {
-        const statusOrder = ["In-Car", "Fetch-to-shop", "Shopping", "Wrapping", "Waiting for Reindeer"];
+        const statusOrder = ["In-Car", "Fetch-to-shop", "Registration Complete","Shopping", "Wrapping", "Waiting for Reindeer"];
         visibleSlots.sort((a, b) => {
             const statusCompare = statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
             if (statusCompare !== 0) return statusCompare;
@@ -239,13 +237,14 @@ function renderParkingMap() {
         slotDiv.innerHTML = `
             <strong>Spot ${slot["parking-number"]}</strong><br>
             Status: ${slot.status}<br>
-            Car #: ${slot["car-number"]}<br>
+            Ticket #: ${slot["car-number"]}<br>
             Language: ${slot.language}<br>
             Parked: ${parkedTime}
         `;
 
         if (showRemoveButton) {
             const removeButton = document.createElement("button");
+            removeButton.classList.add("remove-btn");
             removeButton.textContent = "Remove Car";
             removeButton.onclick = () => removeCar(slot["parking-number"]);
             slotDiv.appendChild(removeButton);
@@ -380,7 +379,7 @@ function undoRemove() {
 
 
 function changeStatus(parkingNumber) {
-    const statuses = ["In-Car", "Fetch-to-shop", "Shopping", "Wrapping", "Waiting for Reindeer"];
+    const statuses = ["In-Car", "Fetch-to-shop", "Registration Complete", "Shopping", "Wrapping", "Waiting for Reindeer"];
     const slot = parkingSlots.find(slot => slot["parking-number"] === parkingNumber);
     if (slot && slot["car-number"]) {
         const currentIndex = statuses.indexOf(slot.status);
