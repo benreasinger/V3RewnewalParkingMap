@@ -37,8 +37,8 @@
       <h3>Add New Vehicle</h3>
       <input type="text" id="newCarNumber" placeholder="Enter Car Number" oninput="this.value = this.value.replace(/[^0-9-]/g, '').slice(0, 11)">
       <select id="newCarLanguage">
-        <option value="english">English</option>
-        <option value="spanish">Spanish</option>
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
       </select>
       <input type="number" id="parkingNumberInput" placeholder="Parking Spot Number" min="1">
       <button onclick="createVehicle()">Add Vehicle</button>

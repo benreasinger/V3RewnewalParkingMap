@@ -31,10 +31,14 @@ body {
 }
 
 .remove-btn {
-  font-size: 16px;
-  color: rgb(255, 0, 0);
+  background-color: #C94C4C;
+  color: #FFFFFF;             
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
   font-weight: bold;
-  background-color: #606060;
+  transition: all 0.3s ease;
 }
 
 
@@ -174,12 +178,14 @@ border-radius: 5px;
 }
 
 button {
-  margin: 5px;
-  padding: 3px;
-  cursor: pointer;
-  border-radius: 7px;
+   background-color: #4AA3A1;  /* flashy teal */
+  color: #FFFFFF;
   border: none;
-  background-color: #E1E5EE;
+  border-radius: 8px;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 5px;
 }
 
 /* Modal Styles */
@@ -430,6 +436,9 @@ select:focus {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;       /* vertical centering */
+  justify-content: center;   /* horizontal centering */
 }
 
 /* Positions when open (circle arc) */
@@ -438,6 +447,7 @@ select:focus {
   opacity: 1;
   pointer-events: auto;
 }
+
 
 .fab-container.open #btn-undo {
   transform: translate(0px, -60px);
@@ -449,8 +459,9 @@ select:focus {
   flex-direction: column;
 }
 .dropdown {
-  position: relative;
-  display: inline-block;
+  /* position: relative; */
+  /* display: inline-block; */
+  margin: 10px;
 }
 
 .dropbtn {

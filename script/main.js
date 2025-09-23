@@ -238,7 +238,7 @@ function renderParkingMap() {
             <strong>Spot ${slot["parking-number"]}</strong><br>
             Status: ${slot.status}<br>
             Ticket #: ${slot["car-number"]}<br>
-            Language: ${slot.language}<br>
+            Language: <strong>${slot.language}</strong><br>
             Parked: ${parkedTime}
         `;
 
