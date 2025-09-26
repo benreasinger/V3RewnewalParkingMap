@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wrapping Test</title>
+  <link rel="stylesheet" href="../stylesheet/giftWrap.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="../script/wrap.js" defer></script>
+</head>
+<body>
+<div class="nav-bar" >
+    <h1>Wrapping Station</h1>
+</div>
+<button class="bag-but" onclick="openWrapModal()">Create A New Bag Tracker</button>
+
+<div id="bags"></div>
+
+ <div id="WrapModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeWrapModal()">&times;</span>
+      <h3>Add A New Infocard!</h3>
+      <input type="text" id="newCarNumber" placeholder="Enter Ticket Number" oninput="this.value = this.value.replace(/[^0-9-]/g, '').slice(0, 11)">
+      <input type="number" id="newChildCount" placeholder="Enter Child Count" min="1" max="10">
+      <input type="number" id="newBagCount" placeholder="Enter Bag Count" min="1" max="25">
+
+      
+        <button onclick="createWrapCard()">Submit</button>
+    </div>
+
+  </div>
+</body>
+</html>
